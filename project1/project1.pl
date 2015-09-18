@@ -1,16 +1,23 @@
-$DNA = 'ACTCTAGAGATATA';
+open(PROTEINFILE, 'NM_021964.fasta');
 
-print "Here is the starting DNA:\n";
-print "$DNA\n\n";
+@bases = qw/A C G T/;
 
-$rev = $DNA;
-$rev =~ tr/T/B/;
-$rev =~ tr/A/T/;
-$rev =~ tr/B/A/; # swap T with A
-$rev =~ tr/G/B/;
-$rev =~ tr/C/G/;
-$rev =~ tr/B/C/; # swap T with A
+# Take the input from the protein file and put each character
+# into an list of bases.
 
+while ( $line = <PROTEINFILE> ) {
+	next if ($line =~ /^>/);
+	chomp $line;
+	push(@string, split("", $line));
+}
 
-print "Here is the result of transcribing the reverse complement:\n";
-print "$rev\n\n";
+# Iterate over the list and count occurences of G or C.
+$baseNum = 0;
+foreach $base (@string) {
+	if (($base eq "G") || ($base eq "C")) {
+		$baseNum++;
+	}
+}
+
+print "The percentage of G's or C's is $baseNum out of ", 
+	   scalar @string, ": ", ($baseNum/@string)*100, "%\n";
