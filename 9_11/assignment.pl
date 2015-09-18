@@ -7,12 +7,20 @@ print "What is your last name? ";
 chomp ($last_name = <STDIN>);
 
 print "Please enter your favorite foods, one per line.\n";
+print "Ctrl-D to finish.\n";
 chomp(@foods=<STDIN>);
 
-#  Insert the word "and" into the list of foods, so the user doesn't have 
+#  Remove empty entries
+foreach $food (@foods) {
+  if ($food ne '') {
+    push(@newfoods, $food);
+  }
+}
+
+#  Insert the word "and" into the list of foods, so the user doesn't have
 #  to type it
-push @foods, $foods[-1];
-$foods[-2] = "and";
+push @newfoods, $newfoods[-1];
+$newfoods[-2] = "and";
 
 #  Assume that we won't include the Oxford comma
 $include_oxford_comma = 0;
@@ -24,11 +32,11 @@ if (@ARGV == 1) {
 
 #  Using the oxford comma means that we should have a comma after each word in the list
 if ($include_oxford_comma) {
-	$foods = join (", ", @foods[0..(@foods-2)]);
+	$foods = join (", ", @newfoods[0..(@newfoods-2)]);
 	$foods .= " $foods[-1]";
 }
 else {
-	$foods = join (", ", (@foods[0..(@foods-3)]));
+	$foods = join (", ", (@newfoods[0..(@newfoods-3)]));
 	$foods .= " and $foods[-1]";
 }
 
