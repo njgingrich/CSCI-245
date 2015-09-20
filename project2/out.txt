@@ -1,0 +1,46 @@
+Alphabetical order of proteins:
+A 43
+C 11
+D 50
+E 58
+F 27
+G 38
+H 30
+I 30
+K 61
+L 57
+M 23
+N 38
+P 36
+Q 57
+R 31
+S 91
+T 46
+V 45
+W 0
+Y 22
+
+Number of different amino acids: 19
+No occurences of W
+
+Amino acids in order of count:
+S 91
+K 61
+E 58
+Q 57
+L 57
+D 50
+T 46
+V 45
+A 43
+G 38
+N 38
+P 36
+R 31
+H 30
+I 30
+F 27
+M 23
+Y 22
+C 11
+W 0
