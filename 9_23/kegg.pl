@@ -1,24 +1,21 @@
-#(?:(\w+)(\s?:\s?)){2}((\w+(\s\+\s)+)+)?\w+(\s(<)?=(>)?\s)((\w+(\s\+\s)+)+)?\w+
+use strict;
 
-if (!$ARGV[0]) {
-    die "No file parameter.\n";
-}
-
-my($file) = $ARGV[0];
-if (!open(FILE, $file)) {
-    die "File doesn't exist.\n";
-}
+# (?:(\w+)(\s?:\s?)){2}((\w+(\s\+\s)+)+)?\w+(\s(<)?=(>)?\s)((\w+(\s\+\s)+)+)?\w+
+# (R\d+)\s*:\s*(\d+):\s*([^<]*)(<?=>?)\s*(.*)(")?
 
 while (<>) {
-    if ($_ =~ /(?:(\w+)(\s?:\s?)){2}((\w+(\s\+\s)+)+)?\w+(\s(<)?=>\s)\w+/) {
+    if (/(?<reaction>R\d+)\s*:\s*(?<map_id>\d+):\s*(?<in>[^<]*)(?<arrow><?=>?)\s*(?<out>.*)/) {
+        my ($reaction, $map, $in, $arrow, $out) = ($+{reaction}, $+{map_id}, $+{in}, $+{arrow}, $+{out});
         print $_;
         print "\n";
-        print "1: ", $1, "\n";
-        print "2: ", $2, "\n";
-        print "3: ", $3, "\n";
-        print "4: ", $4, "\n";
-        print "5: ", $5, "\n";
-        print "6: ", $6, "\n";
+        print "reaction is ",  $reaction, "\n";
+        print "map is ",       $map, "\n";
+        print "direction is ", $arrow, "\n";
+        print "substrate is ", $in, "\n";
+        print "product is ",   $out, "\n";
+        if ($in =~ /\+/) {
+            
+        }
     }
 
 }
